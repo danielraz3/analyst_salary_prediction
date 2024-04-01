@@ -19,8 +19,8 @@ import sys
 # Print Python version and environment details
 
 
-print("Python version:", sys.version)
-print("Python environment:", sys.prefix)
+st.write(sys.version)
+st.write(sys.prefix)
 
 
 #picklefile = open("egradient_boosting_regressor_model.pkl", "rb")
