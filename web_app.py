@@ -6,7 +6,6 @@
 
 import streamlit as st
 import pandas as pd
-from xgboost import XGBRegressor
 import scipy
 import joblib
 
