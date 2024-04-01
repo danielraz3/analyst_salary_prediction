@@ -10,40 +10,30 @@ import scipy
 import joblib
 import pickle
 import sklearn
-#import sklearn.ensemble._gb_losses
 import sys
 import subprocess
 import sklearn.ensemble
 from sklearn.ensemble import GradientBoostingRegressor
+#import sklearn.ensemble._gb_losses
 
 
 
 
-# Print Python version and environment details
-
-
-#st.write(sys.version)
-#st.write(sys.prefix)
-#subprocess.run(['pip', 'install', 'scikit-learn'])
-
-
-#result = subprocess.run(['pip', 'list'], capture_output=True, text=True)
-#st.write(result.stdout)
-
+#Trying to load model v1
 
 #picklefile = open("egradient_boosting_regressor_model.pkl", "rb")
 #model = pickle.load(picklefile)
 
+#Trying to load model v2
 #model = joblib.load('gradient_boosting_regressor_model.pkl')
+
+#Trying to load model v3
+model = pd.read_pickle('gradient_boosting_regressor_model.pkl')
+
+preprocessor = joblib.load('preprocessor.joblib')
 
 def main():
 
-    model = pd.read_pickle('gradient_boosting_regressor_model.pkl')
-    preprocessor = joblib.load('preprocessor.joblib')
-
-
-    st.title('Salary Prediction Web App')
-#     company_type = st.selectbox("סוג החברה",["ass","saxaas"]) 
 
     company_type_list=['תעשייה ישראלית', 'הייטק', 'אחר']
     is_manager_list=['לא', 'כן']
@@ -53,6 +43,8 @@ def main():
     is_job_location=['מרכז', 'שאר הטארץ', 'אזור תל אביב', 'עבודה מהבית']
     is_analyst_type=['Business analyst','Financial Analyst','Marketing','Data sceintist','other','BI']
 
+    st.title('Salary Prediction Web App')
+    
     company_type = st.selectbox("סוג החברה", company_type_list) 
     is_manager = st.selectbox("האם תפקיד ניהולי?", is_manager_list) 
     is_sql = st.selectbox("האם התפקיד כולל שימוש באס.קיו.אל?", is_sql_list) 
