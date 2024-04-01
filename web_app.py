@@ -23,6 +23,7 @@ import subprocess
 
 st.write(sys.version)
 st.write(sys.prefix)
+subprocess.run(['pip', 'install', 'scikit-learn'])
 
 
 result = subprocess.run(['pip', 'list'], capture_output=True, text=True)
