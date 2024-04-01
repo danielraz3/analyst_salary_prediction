@@ -11,8 +11,8 @@ import joblib
 
 
 
-model = joblib.load('model.pkl')
-preprocessor = joblib.load('preprocessor.joblib')
+model = joblib.load('model')
+preprocessor = joblib.load('preprocessor')
 
 
 def main():
