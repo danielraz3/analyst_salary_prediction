@@ -14,10 +14,11 @@ import pickle
 
 
 
-picklefile = open("egradient_boosting_regressor_model.pkl", "rb")
-model = pickle.load(picklefile)
+#picklefile = open("egradient_boosting_regressor_model.pkl", "rb")
+#model = pickle.load(picklefile)
 
 #model = joblib.load('gradient_boosting_regressor_model.pkl')
+model = pd.read_pickle('gradient_boosting_regressor_model.pkl')
 preprocessor = joblib.load('preprocessor.joblib')
 
 
