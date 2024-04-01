@@ -13,6 +13,7 @@ import sklearn
 #import sklearn.ensemble._gb_losses
 import sys
 import subprocess
+import sklearn.ensemble
 from sklearn.ensemble import GradientBoostingRegressor
 
 
