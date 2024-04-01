@@ -19,7 +19,8 @@ import sys
 # Print Python version and environment details
 
 
-
+print("Python version:", sys.version)
+print("Python environment:", sys.prefix)
 
 
 #picklefile = open("egradient_boosting_regressor_model.pkl", "rb")
@@ -98,7 +99,7 @@ def main():
         st.write(int(prediction[0]))
     
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()
 
 
