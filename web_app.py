@@ -17,8 +17,7 @@ import sys
 
 
 # Print Python version and environment details
-print("Python version:", sys.version)
-print("Python environment:", sys.prefix)
+
 
 
 
@@ -27,11 +26,15 @@ print("Python environment:", sys.prefix)
 #model = pickle.load(picklefile)
 
 #model = joblib.load('gradient_boosting_regressor_model.pkl')
-model = pd.read_pickle('gradient_boosting_regressor_model.pkl')
-preprocessor = joblib.load('preprocessor.joblib')
-
 
 def main():
+
+    print("Python version:", sys.version)
+    print("Python environment:", sys.prefix)
+    model = pd.read_pickle('gradient_boosting_regressor_model.pkl')
+    preprocessor = joblib.load('preprocessor.joblib')
+
+
     st.title('Salary Prediction Web App')
 #     company_type = st.selectbox("סוג החברה",["ass","saxaas"]) 
 
