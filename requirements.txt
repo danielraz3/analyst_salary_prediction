@@ -4,4 +4,4 @@ scipy
 joblib
 numpy
 scikit-learn
-pickleshare==0.7.5
+pickleshare
