@@ -11,9 +11,14 @@ import joblib
 import pickle
 import sklearn
 #import sklearn.ensemble._gb_losses
+import sys
 
 
 
+
+# Print Python version and environment details
+print("Python version:", sys.version)
+print("Python environment:", sys.prefix)
 
 
 
