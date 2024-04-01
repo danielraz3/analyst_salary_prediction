@@ -11,7 +11,7 @@ import joblib
 
 
 
-model = joblib.load('model')
+model = joblib.load('gradient_boosting_regressor_model')
 preprocessor = joblib.load('preprocessor')
 
 
