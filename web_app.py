@@ -13,7 +13,7 @@ import sklearn
 #import sklearn.ensemble._gb_losses
 import sys
 import subprocess
-
+from sklearn.ensemble import GradientBoostingRegressor
 
 
 
@@ -21,13 +21,13 @@ import subprocess
 # Print Python version and environment details
 
 
-st.write(sys.version)
-st.write(sys.prefix)
-subprocess.run(['pip', 'install', 'scikit-learn'])
+#st.write(sys.version)
+#st.write(sys.prefix)
+#subprocess.run(['pip', 'install', 'scikit-learn'])
 
 
-result = subprocess.run(['pip', 'list'], capture_output=True, text=True)
-st.write(result.stdout)
+#result = subprocess.run(['pip', 'list'], capture_output=True, text=True)
+#st.write(result.stdout)
 
 
 #picklefile = open("egradient_boosting_regressor_model.pkl", "rb")
@@ -37,8 +37,6 @@ st.write(result.stdout)
 
 def main():
 
-    print("Python version:", sys.version)
-    print("Python environment:", sys.prefix)
     model = pd.read_pickle('gradient_boosting_regressor_model.pkl')
     preprocessor = joblib.load('preprocessor.joblib')
 
