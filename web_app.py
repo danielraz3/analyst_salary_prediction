@@ -25,11 +25,10 @@ from sklearn.ensemble import GradientBoostingRegressor
 #model = pickle.load(picklefile)
 
 #Trying to load model v2
-#model = joblib.load('gradient_boosting_regressor_model.pkl')
+model = joblib.load('gradient_boosting_regressor_model.pkl')
 
 #Trying to load model v3
-model = pd.read_pickle('gradient_boosting_regressor_model.pkl')
-
+#model = pd.read_pickle('gradient_boosting_regressor_model.pkl')
 preprocessor = joblib.load('preprocessor.joblib')
 
 def main():
