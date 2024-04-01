@@ -3,5 +3,5 @@ pandas
 scipy
 joblib
 numpy
-scikit-learn
+scikit-learn==1.3.0
 pickleshare
