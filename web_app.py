@@ -11,8 +11,8 @@ import joblib
 
 
 
-model = joblib.load('gradient_boosting_regressor_model')
-preprocessor = joblib.load('preprocessor')
+model = joblib.load('gradient_boosting_regressor_model.pkl')
+preprocessor = joblib.load('preprocessor.joblib')
 
 
 def main():
