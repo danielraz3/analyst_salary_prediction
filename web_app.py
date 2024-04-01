@@ -12,6 +12,8 @@ import pickle
 import sklearn
 #import sklearn.ensemble._gb_losses
 import sys
+import subprocess
+
 
 
 
@@ -21,6 +23,10 @@ import sys
 
 st.write(sys.version)
 st.write(sys.prefix)
+
+
+result = subprocess.run(['pip', 'list'], capture_output=True, text=True)
+st.write(result.stdout)
 
 
 #picklefile = open("egradient_boosting_regressor_model.pkl", "rb")
