@@ -4,3 +4,4 @@ scipy
 joblib
 numpy
 scikit-learn
+pickle

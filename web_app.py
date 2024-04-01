@@ -8,11 +8,16 @@ import streamlit as st
 import pandas as pd
 import scipy
 import joblib
-import sklearn.ensemble._gb_losses
+import pickle
 
 
 
-model = joblib.load('gradient_boosting_regressor_model.pkl')
+
+
+picklefile = open("egradient_boosting_regressor_model.pkl", "rb")
+model = pickle.load(picklefile)
+
+#model = joblib.load('gradient_boosting_regressor_model.pkl')
 preprocessor = joblib.load('preprocessor.joblib')
 
 
