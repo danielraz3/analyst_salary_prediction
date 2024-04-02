@@ -16,7 +16,7 @@ import sklearn.ensemble
 from sklearn.ensemble import GradientBoostingRegressor
 
 
-model = joblib.load('model.pkl')
+model = joblib.load('gradient_boosting_regressor_model.pkl')
 preprocessor = joblib.load('preprocessor.joblib')
 
 
