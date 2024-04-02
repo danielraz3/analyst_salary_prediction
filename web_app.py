@@ -35,7 +35,7 @@ def main():
     company_type = st.selectbox("סוג החברה", company_type_list) 
     is_manager = st.selectbox("האם תפקיד ניהולי?", is_manager_list) 
     is_sql = st.selectbox("האם התפקיד כולל שימוש באס.קיו.אל?", is_sql_list) 
-    is_python = st.selectbox("האם התפקיד כולל שימוש בשפת פייתוןי?", is_ml_list) 
+    is_python = st.selectbox("האם התפקיד כולל שימוש בשפת פייתון?", is_ml_list) 
     viz_tool = st.selectbox("מהו כלי הויזואליזציה העיקרי בו אתה משתמש?", is_viz_tool) 
     job_location = st.selectbox("היכן ממוקמים המשרדים?", is_job_location) 
     analyst_type = st.selectbox("איזה סוג אנליסט אתה?", is_analyst_type) 
@@ -44,7 +44,7 @@ def main():
 
     
     if st.button("Predict"): 
-        features = [[company_type,is_manager,is_sql,is_ml,exp]]
+        features = [[company_type,is_manager,is_sql,is_python,exp]]
         data = {'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
                 'year_of_surv':'2024','exp': float(exp),'viz_tool':viz_tool,'job_location':job_location,
                 'analyst_type':analyst_type, }
