@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[29]:
+# In[30]:
 
 
 import streamlit as st
@@ -11,7 +11,7 @@ import joblib
 import sklearn
 from sklearn.ensemble import GradientBoostingRegressor
 
-# Load your models
+# Load your models (ensure these files exist and are in the correct path)
 model = joblib.load('gradient_boosting_regressor_model.pkl')
 preprocessor = joblib.load('preprocessor.joblib')
 
@@ -23,10 +23,6 @@ def main():
         html {
             direction: rtl;
         }
-        /* Targeting the slider specifically to ensure LTR */
-        .stSlider .css-1v4eu6y {
-            direction: ltr;
-        }
         .footer {
             position: fixed;
             right: 0;
@@ -36,27 +32,23 @@ def main():
             background-color: white;
             text-align: center;
         }
-        /* Additional spacing after the subtitle */
-        .subtitle {
-            margin-bottom: 20px;
+        /* This CSS targets the specific structure of the slider widget to enforce LTR. */
+        /* It may not be effective due to Streamlit's dynamic class names. */
+        .stSlider > div:first-child > div {
+            direction: ltr;
         }
         </style>
         """,
         unsafe_allow_html=True
     )
     
-    st.markdown("""
-    <h1 style='text-align: center;'>מחשבון שכר לאנליסטים 2024</h1>
-    """, unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>מחשבון שכר לאנליסטים 2024</h1>", unsafe_allow_html=True)
     
-    # Adding class for spacing
     st.markdown("""
-    <h2 class="subtitle" style='text-align: center; color: gray; font-size: 16px;'>המחשבון מבוסס על תוצאות סקר אנליסטים שנערך בקבוצת <a href="https://www.facebook.com/groups/DataAnalyticsIsrael" target="_blank">Data Analyst</a></h2>
+    <h2 style='text-align: center; color: gray; font-size: 16px;'>המחשבון מבוסס על תוצאות סקר אנליסטים שנערך בקבוצת <a href="https://www.facebook.com/groups/DataAnalyticsIsrael" target="_blank">Data Analyst</a></h2>
+    <br>
     """, unsafe_allow_html=True)
 
-    # App content with added spacing
-    st.text("")  # This adds a bit of space after the subtitle before the select boxes start
-    
     col1, col2 = st.columns(2)
     with col1:
         is_sql_list = ['כן', 'לא', 'לעיתים נדירות']
@@ -84,26 +76,23 @@ def main():
         is_analyst_type = ['Business/Data analyst']
         analyst_type = st.selectbox("איזה סוג אנליסט אתה?", is_analyst_type)
     
-    exp = st.slider("שנות נסיון", min_value=0, max_value=20, value=0)
+    exp = st.slider("שנות נסיון", min_value=0, max_value=20, value=0, format="%d")
 
-    # Improved centering for the "Predict" button
+    # Attempt to better center the Predict button
     col1, col2, col3 = st.columns([1,2,1])
     with col2:
-        predict_button = st.button("Predict")
-    
-    if predict_button:
-        data = {'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
-                'year_of_surv': '2024', 'exp': exp, 'viz_tool': viz_tool, 'analyst_type': analyst_type}
-        
-        new_input_data = pd.DataFrame([list(data.values())], columns=['company_type', 'is_manager', 'is_sql', 'is_python', 'year_of_surv', 'exp', 'viz_tool', 'analyst_type'])
-        
-        prediction_input = preprocessor.transform(new_input_data)
-        prediction = model.predict(prediction_input)
-        prediction_formatted = f"{int(round(prediction[0], -2)):,}"
-        
-        st.markdown(f"<h2 style='text-align: center; color: black;'>Predicted Salary: {prediction_formatted} ₪</h2>", unsafe_allow_html=True)
+        if st.button("Predict"):
+            data = {'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
+                    'year_of_surv': '2024', 'exp': exp, 'viz_tool': viz_tool, 'analyst_type': analyst_type}
+            
+            new_input_data = pd.DataFrame([list(data.values())], columns=['company_type', 'is_manager', 'is_sql', 'is_python', 'year_of_surv', 'exp', 'viz_tool', 'analyst_type'])
+            
+            prediction_input = preprocessor.transform(new_input_data)
+            prediction = model.predict(prediction_input)
+            prediction_formatted = f"{int(round(prediction[0], -2)):,}"
+            
+            st.markdown(f"<h2 style='text-align: center; color: black;'>Predicted Salary: {prediction_formatted} ₪</h2>", unsafe_allow_html=True)
 
-    # Add footer with link
     st.markdown("""
     <div class="footer">
     פותח על ידי <a href="https://www.linkedin.com/in/daniel-raz-1747b2118/" target="_blank">דניאל רז</a>
