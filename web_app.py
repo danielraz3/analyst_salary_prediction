@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[30]:
+# In[31]:
 
 
 import streamlit as st
@@ -16,31 +16,7 @@ model = joblib.load('gradient_boosting_regressor_model.pkl')
 preprocessor = joblib.load('preprocessor.joblib')
 
 def main():
-    # Inject CSS for RTL support globally and specific styles for the slider and footer
-    st.markdown(
-        """
-        <style>
-        html {
-            direction: rtl;
-        }
-        .footer {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            padding: 1rem;
-            background-color: white;
-            text-align: center;
-        }
-        /* This CSS targets the specific structure of the slider widget to enforce LTR. */
-        /* It may not be effective due to Streamlit's dynamic class names. */
-        .stSlider > div:first-child > div {
-            direction: ltr;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+ 
     
     st.markdown("<h1 style='text-align: center;'>מחשבון שכר לאנליסטים 2024</h1>", unsafe_allow_html=True)
     
@@ -78,20 +54,17 @@ def main():
     
     exp = st.slider("שנות נסיון", min_value=0, max_value=20, value=0, format="%d")
 
-    # Attempt to better center the Predict button
-    col1, col2, col3 = st.columns([1,2,1])
-    with col2:
-        if st.button("Predict"):
-            data = {'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
-                    'year_of_surv': '2024', 'exp': exp, 'viz_tool': viz_tool, 'analyst_type': analyst_type}
-            
-            new_input_data = pd.DataFrame([list(data.values())], columns=['company_type', 'is_manager', 'is_sql', 'is_python', 'year_of_surv', 'exp', 'viz_tool', 'analyst_type'])
-            
-            prediction_input = preprocessor.transform(new_input_data)
-            prediction = model.predict(prediction_input)
-            prediction_formatted = f"{int(round(prediction[0], -2)):,}"
-            
-            st.markdown(f"<h2 style='text-align: center; color: black;'>Predicted Salary: {prediction_formatted} ₪</h2>", unsafe_allow_html=True)
+    if st.button("Predict"):
+        data = {'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
+                'year_of_surv': '2024', 'exp': exp, 'viz_tool': viz_tool, 'analyst_type': analyst_type}
+
+        new_input_data = pd.DataFrame([list(data.values())], columns=['company_type', 'is_manager', 'is_sql', 'is_python', 'year_of_surv', 'exp', 'viz_tool', 'analyst_type'])
+
+        prediction_input = preprocessor.transform(new_input_data)
+        prediction = model.predict(prediction_input)
+        prediction_formatted = f"{int(round(prediction[0], -2)):,}"
+
+        st.markdown(f"<h2 style='text-align: center; color: black;'>Predicted Salary: {prediction_formatted} ₪</h2>", unsafe_allow_html=True)
 
     st.markdown("""
     <div class="footer">
