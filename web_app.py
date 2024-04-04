@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[26]:
+# In[27]:
 
 
 import streamlit as st
@@ -34,7 +34,13 @@ def main():
     st.title('מחשבון שכר לאנליסטים 2024')
     # Adding a smaller title under the main title
     st.markdown("""
-    <h2 style='text-align: center; color: gray;'>המחשבון מבוסס על תוצאות סקר אנליסטים שנערך בקבוצת data analyst</h2>
+    <h2 style='text-align: center; color: gray;'>המחשבון מבוסס על תוצאות סקר אנליסטים שנערך בקבוצת <a href="https://www.facebook.com/groups/DataAnalyticsIsrael" target="_blank">Data Analyst</a></h2>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="footer">
+    פותח על ידי <a href="https://www.linkedin.com/in/daniel-raz-1747b2118/" target="_blank">דניאל רז</a>
+    </div>
     """, unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
