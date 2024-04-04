@@ -52,8 +52,8 @@ def main():
         
         print(data)
         new_input_data=pd.DataFrame([list(data.values())], 
-                                    columns=['company_type','is_manager','is_sql','is_python','year_of_surv',
-                                             'exp'])
+                                    columns=['company_type','is_manager','is_sql','is_python',
+                                             'year_of_surv','exp','viz_tool'])
                                              #.'viz_tool','job_location','analyst_type'])
                 
         feature_names = preprocessor.get_feature_names_out()
