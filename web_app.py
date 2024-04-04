@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[19]:
+# In[21]:
 
 
 import streamlit as st
@@ -21,7 +21,7 @@ preprocessor = joblib.load('preprocessor.joblib')
 
 
 def main():
-    st.title('Salary Prediction Web App')
+    st.title('2024 Data Analyst Salary Calculator')
 #     company_type = st.selectbox("סוג החברה",["ass","saxaas"]) 
 
     company_type_list=['הייטק','תעשייה ישראלית','אחר']
@@ -79,8 +79,12 @@ def main():
         prediction_input = new_input_df.values  # Use this for prediction
         prediction = model.predict(new_input_df)
         prediction=int(round(prediction[0]/100)*100)
+        prediction_formatted = f"{int(prediction):,}"
+
         st.write("### Predictions:")
-        st.write(str(prediction))
+        st.write(str(prediction_formatted))
+        st.markdown(f"<h1 style='text-align: center; color: black;'>{prediction_formatted}</h1>", unsafe_allow_html=True)
+
     
 
 if __name__ == "__main__":
