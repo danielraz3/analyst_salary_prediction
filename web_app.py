@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[24]:
+# In[26]:
 
 
 import streamlit as st
@@ -16,19 +16,26 @@ model = joblib.load('gradient_boosting_regressor_model.pkl')
 preprocessor = joblib.load('preprocessor.joblib')
 
 def main():
-    # Inject CSS for RTL support
+    # Inject CSS for RTL support globally
     st.markdown(
         """
         <style>
         html {
             direction: rtl;
         }
+        .ltr-slider .stSlider > div {
+            direction: ltr;
+        }
         </style>
         """,
         unsafe_allow_html=True
     )
     
-    st.title('2024 Data Analyst Salary Calculator')
+    st.title('מחשבון שכר לאנליסטים 2024')
+    # Adding a smaller title under the main title
+    st.markdown("""
+    <h2 style='text-align: center; color: gray;'>המחשבון מבוסס על תוצאות סקר אנליסטים שנערך בקבוצת data analyst</h2>
+    """, unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     
@@ -45,17 +52,17 @@ def main():
     with col3:
         is_viz_tool = ['Tableau', 'Power BI', 'Excel', 'Looker/Qlik/Python/R', 'Other', 'No Tool']
         viz_tool = st.selectbox("מהו כלי הויזואליזציה העיקרי בו אתה משתמש?", is_viz_tool)
-    
+
     with col4:
         is_manager_list = ['לא', 'כן']
         is_manager = st.selectbox("האם תפקיד ניהולי?", is_manager_list)
-        
+
     col5, col6 = st.columns(2)
     
     with col5:
         company_type_list = ['הייטק', 'תעשייה ישראלית', 'אחר']
         company_type = st.selectbox("סוג החברה", company_type_list)
-        
+
     with col6:
         is_analyst_type = ['Business/Data analyst']
         analyst_type = st.selectbox("איזה סוג אנליסט אתה?", is_analyst_type)
@@ -63,10 +70,8 @@ def main():
     exp = st.slider("שנות נסיון", min_value=0, max_value=20, value=0)
 
     if st.button("Predict"):
-        data = {
-            'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
-            'year_of_surv': '2024', 'exp': exp, 'viz_tool': viz_tool, 'analyst_type': analyst_type
-        }
+        data = {'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
+                'year_of_surv': '2024', 'exp': exp, 'viz_tool': viz_tool, 'analyst_type': analyst_type}
         
         new_input_data = pd.DataFrame([list(data.values())], columns=['company_type', 'is_manager', 'is_sql', 'is_python', 'year_of_surv', 'exp', 'viz_tool', 'analyst_type'])
         
