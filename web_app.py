@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
+# In[15]:
 
 
 import streamlit as st
@@ -37,8 +37,8 @@ def main():
     is_sql = st.selectbox("האם התפקיד כולל שימוש באס.קיו.אל?", is_sql_list) 
     is_python = st.selectbox("האם התפקיד כולל שימוש בשפת פייתון?", is_ml_list) 
     viz_tool = st.selectbox("מהו כלי הויזואליזציה העיקרי בו אתה משתמש?", is_viz_tool) 
-    job_location = st.selectbox("היכן ממוקמים המשרדים?", is_job_location) 
-    analyst_type = st.selectbox("איזה סוג אנליסט אתה?", is_analyst_type) 
+#     job_location = st.selectbox("היכן ממוקמים המשרדים?", is_job_location) 
+#     analyst_type = st.selectbox("איזה סוג אנליסט אתה?", is_analyst_type) 
     exp = st.text_input("שנות נסיון") 
 
 
@@ -46,13 +46,15 @@ def main():
     if st.button("Predict"): 
         features = [[company_type,is_manager,is_sql,is_python,exp]]
         data = {'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
-                'year_of_surv':'2024','exp': float(exp),'viz_tool':viz_tool,'job_location':job_location,
-                'analyst_type':analyst_type, }
+                'year_of_surv':'2024','exp': float(exp),'viz_tool':viz_tool}
+#                 ,'job_location':job_location,
+#                 'analyst_type':analyst_type, }
         
         print(data)
         new_input_data=pd.DataFrame([list(data.values())], 
-                                    columns=['company_type','is_manager','is_sql','is_python','year_of_surv','exp',
-                                             'viz_tool','job_location','analyst_type'])
+                                    columns=['company_type','is_manager','is_sql','is_python','year_of_surv',
+                                             'exp'])
+                                             #.'viz_tool','job_location','analyst_type'])
                 
         feature_names = preprocessor.get_feature_names_out()
 
