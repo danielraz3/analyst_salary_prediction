@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[28]:
+# In[29]:
 
 
 import streamlit as st
@@ -16,14 +16,15 @@ model = joblib.load('gradient_boosting_regressor_model.pkl')
 preprocessor = joblib.load('preprocessor.joblib')
 
 def main():
-    # Inject CSS for RTL support globally
+    # Inject CSS for RTL support globally and specific styles for the slider and footer
     st.markdown(
         """
         <style>
         html {
             direction: rtl;
         }
-        .ltr-slider .stSlider > div {
+        /* Targeting the slider specifically to ensure LTR */
+        .stSlider .css-1v4eu6y {
             direction: ltr;
         }
         .footer {
@@ -35,22 +36,27 @@ def main():
             background-color: white;
             text-align: center;
         }
+        /* Additional spacing after the subtitle */
+        .subtitle {
+            margin-bottom: 20px;
+        }
         </style>
         """,
         unsafe_allow_html=True
     )
     
-    # Main title centered
     st.markdown("""
     <h1 style='text-align: center;'>מחשבון שכר לאנליסטים 2024</h1>
     """, unsafe_allow_html=True)
     
-    # Smaller, centered subtitle with hyperlink
+    # Adding class for spacing
     st.markdown("""
-    <h2 style='text-align: center; color: gray; font-size: 16px;'>המחשבון מבוסס על תוצאות סקר אנליסטים שנערך בקבוצת <a href="https://www.facebook.com/groups/DataAnalyticsIsrael" target="_blank">Data Analyst</a></h2>
+    <h2 class="subtitle" style='text-align: center; color: gray; font-size: 16px;'>המחשבון מבוסס על תוצאות סקר אנליסטים שנערך בקבוצת <a href="https://www.facebook.com/groups/DataAnalyticsIsrael" target="_blank">Data Analyst</a></h2>
     """, unsafe_allow_html=True)
 
-    # Define the app layout and input widgets
+    # App content with added spacing
+    st.text("")  # This adds a bit of space after the subtitle before the select boxes start
+    
     col1, col2 = st.columns(2)
     with col1:
         is_sql_list = ['כן', 'לא', 'לעיתים נדירות']
@@ -80,20 +86,22 @@ def main():
     
     exp = st.slider("שנות נסיון", min_value=0, max_value=20, value=0)
 
-    # Center the "Predict" button
-    col1, col2, col3 = st.columns([1, 2, 1])
+    # Improved centering for the "Predict" button
+    col1, col2, col3 = st.columns([1,2,1])
     with col2:
-        if st.button("Predict"):
-            data = {'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
-                    'year_of_surv': '2024', 'exp': exp, 'viz_tool': viz_tool, 'analyst_type': analyst_type}
-            
-            new_input_data = pd.DataFrame([list(data.values())], columns=['company_type', 'is_manager', 'is_sql', 'is_python', 'year_of_surv', 'exp', 'viz_tool', 'analyst_type'])
-            
-            prediction_input = preprocessor.transform(new_input_data)
-            prediction = model.predict(prediction_input)
-            prediction_formatted = f"{int(round(prediction[0], -2)):,}"
-            
-            st.markdown(f"<h2 style='text-align: center; color: black;'>Predicted Salary: {prediction_formatted} ₪</h2>", unsafe_allow_html=True)
+        predict_button = st.button("Predict")
+    
+    if predict_button:
+        data = {'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
+                'year_of_surv': '2024', 'exp': exp, 'viz_tool': viz_tool, 'analyst_type': analyst_type}
+        
+        new_input_data = pd.DataFrame([list(data.values())], columns=['company_type', 'is_manager', 'is_sql', 'is_python', 'year_of_surv', 'exp', 'viz_tool', 'analyst_type'])
+        
+        prediction_input = preprocessor.transform(new_input_data)
+        prediction = model.predict(prediction_input)
+        prediction_formatted = f"{int(round(prediction[0], -2)):,}"
+        
+        st.markdown(f"<h2 style='text-align: center; color: black;'>Predicted Salary: {prediction_formatted} ₪</h2>", unsafe_allow_html=True)
 
     # Add footer with link
     st.markdown("""
