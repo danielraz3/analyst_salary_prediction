@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[22]:
+# In[24]:
 
 
 import streamlit as st
@@ -19,35 +19,43 @@ def main():
     st.title('2024 Data Analyst Salary Calculator')
     
     # Enhanced layout using columns
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)
     
     with col1:
-        company_type_list = ['הייטק', 'תעשייה ישראלית', 'אחר']
-        company_type = st.selectbox("סוג החברה", company_type_list)
-    
-    with col2:
-        is_manager_list = ['לא', 'כן']
-        is_manager = st.selectbox("האם תפקיד ניהולי?", is_manager_list)
-    
-    with col3:
         is_sql_list = ['כן', 'לא', 'לעיתים נדירות']
         is_sql = st.selectbox("האם התפקיד כולל שימוש באס.קיו.אל?", is_sql_list)
-    
-    col4, col5 = st.columns(2)
-    
-    with col4:
+        
+    with col2:
         is_ml_list = ['לא', 'כן', 'לעיתים נדירות']
         is_python = st.selectbox("האם התפקיד כולל שימוש בשפת פייתון?", is_ml_list)
-    
-    with col5:
+        
+    col3, col4 = st.columns(2)
+
+        
+    with col3:
         is_viz_tool = ['Tableau', 'Power BI', 'Excel', 'Looker/Qlik/Python/R', 'Other', 'No Tool']
         viz_tool = st.selectbox("מהו כלי הויזואליזציה העיקרי בו אתה משתמש?", is_viz_tool)
+    
+    with col4:
+        is_manager_list = ['לא', 'כן']
+        is_manager = st.selectbox("האם תפקיד ניהולי?", is_manager_list)
+        
+    col5, col6 = st.columns(2)
+    
+    with col5:
+        company_type_list = ['הייטק', 'תעשייה ישראלית', 'אחר']
+        company_type = st.selectbox("סוג החברה", company_type_list)
+        
+    with col6:
+        is_analyst_type = ['Business/Data analyst']
+        #, 'BI', 'Financial Analyst', 'Marketing', 'Data scientist', 'Other']
+        analyst_type = st.selectbox("איזה סוג אנליסט אתה?", is_analyst_type)
+    
     
     # Using a slider for years of experience
     exp = st.slider("שנות נסיון", min_value=0, max_value=50, value=5)
     
-    is_analyst_type = ['Business/Data analyst', 'BI', 'Financial Analyst', 'Marketing', 'Data scientist', 'Other']
-    analyst_type = st.selectbox("איזה סוג אנליסט אתה?", is_analyst_type)
+
     
     if st.button("Predict"):
         features = [company_type, is_manager, is_sql, is_python, str(exp)]
