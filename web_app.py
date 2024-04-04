@@ -16,9 +16,20 @@ model = joblib.load('gradient_boosting_regressor_model.pkl')
 preprocessor = joblib.load('preprocessor.joblib')
 
 def main():
+    # Inject CSS for RTL support
+    st.markdown(
+        """
+        <style>
+        html {
+            direction: rtl;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    
     st.title('2024 Data Analyst Salary Calculator')
     
-    # Enhanced layout using columns
     col1, col2 = st.columns(2)
     
     with col1:
@@ -31,7 +42,6 @@ def main():
         
     col3, col4 = st.columns(2)
 
-        
     with col3:
         is_viz_tool = ['Tableau', 'Power BI', 'Excel', 'Looker/Qlik/Python/R', 'Other', 'No Tool']
         viz_tool = st.selectbox("מהו כלי הויזואליזציה העיקרי בו אתה משתמש?", is_viz_tool)
@@ -48,26 +58,18 @@ def main():
         
     with col6:
         is_analyst_type = ['Business/Data analyst']
-        #, 'BI', 'Financial Analyst', 'Marketing', 'Data scientist', 'Other']
         analyst_type = st.selectbox("איזה סוג אנליסט אתה?", is_analyst_type)
     
-    
-    # Using a slider for years of experience
-    exp = st.slider("שנות נסיון", min_value=0, max_value=50, value=5)
-    
+    exp = st.slider("שנות נסיון", min_value=0, max_value=20, value=0)
 
-    
     if st.button("Predict"):
-        features = [company_type, is_manager, is_sql, is_python, str(exp)]
-        data = {'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
-                'year_of_surv': '2024', 'exp': exp, 'viz_tool': viz_tool,
-                'analyst_type': analyst_type}
+        data = {
+            'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
+            'year_of_surv': '2024', 'exp': exp, 'viz_tool': viz_tool, 'analyst_type': analyst_type
+        }
         
-        new_input_data = pd.DataFrame([list(data.values())],
-                                      columns=['company_type', 'is_manager', 'is_sql', 'is_python',
-                                               'year_of_surv', 'exp', 'viz_tool', 'analyst_type'])
+        new_input_data = pd.DataFrame([list(data.values())], columns=['company_type', 'is_manager', 'is_sql', 'is_python', 'year_of_surv', 'exp', 'viz_tool', 'analyst_type'])
         
-        # Process and predict
         prediction_input = preprocessor.transform(new_input_data)
         prediction = model.predict(prediction_input)
         prediction_formatted = f"{int(round(prediction[0], -2)):,}"
