@@ -85,7 +85,7 @@ def main():
         prediction = model.predict(prediction_input)
         prediction_formatted = f"{int(round(prediction[0], -2)):,}"
 
-        st.markdown(f"<h2 style='text-align: center; color: black;'>Predicted Salary: {prediction_formatted} ₪</h2>", unsafe_allow_html=True)
+        st.markdown(f"<h2 style='text-align: center; color: black;'>שכר מוערך צפוי: {prediction_formatted} ₪</h2>", unsafe_allow_html=True)
 
     st.markdown("""
     <div class="footer">
