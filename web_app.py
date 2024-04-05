@@ -73,7 +73,7 @@ def main():
         is_analyst_type = ['Business/Data analyst']
         analyst_type = st.selectbox("איזה סוג אנליסט אתה?", is_analyst_type)
     
-    exp = st.slider("שנות נסיון", min_value=0, max_value=20, value=0, format="%d")
+    exp = st.number_input("שנות נסיון", min_value=0, max_value=20, value=0, format="%d")
 
     if st.button("Predict"):
         data = {'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
