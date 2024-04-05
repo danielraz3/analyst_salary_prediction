@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[31]:
+# In[32]:
 
 
 import streamlit as st
@@ -17,7 +17,28 @@ preprocessor = joblib.load('preprocessor.joblib')
 
 def main():
  
-    
+    st.markdown(
+        """
+        <style>
+        /* Ensure the entire app respects RTL */
+        body {
+            direction: rtl;
+        }
+        /* Adjust the footer to be a bit lower and ensure it's centered */
+        .footer {
+            position: fixed;
+            right: 0;
+            bottom: 10px; /* Adjust this value if you need more space */
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px; /* Add some padding */
+            background-color: transparent; /* Keep the background transparent or set a color */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     st.markdown("<h1 style='text-align: center;'>מחשבון שכר לאנליסטים 2024</h1>", unsafe_allow_html=True)
     
     st.markdown("""
