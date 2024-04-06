@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[5]:
 
 
 import streamlit as st
@@ -10,6 +10,25 @@ import scipy
 import joblib
 import sklearn
 from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.base import BaseEstimator, TransformerMixin
+
+
+
+class YearToCategoryTransformer(BaseEstimator, TransformerMixin):
+    def fit(self, X, y=None):
+        # Assuming X is a DataFrame for simplicity
+        self.feature_names_out_ = X.columns.tolist()  # Capture input feature names
+        return self
+    
+    def transform(self, X, y=None):
+        # Transform logic here (your existing transformation code)
+        # Example transformation:
+        transformed_X = np.digitize(X, bins=[2020, 2021, 2022, 2024])
+        return transformed_X
+
+    def get_feature_names_out(self, input_features=None):
+        # Return the output feature names
+        return self.feature_names_out_
 
 # Load your models (ensure these files exist and are in the correct path)
 model = joblib.load('gradient_boosting_regressor_model.pkl')
