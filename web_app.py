@@ -77,7 +77,7 @@ def main():
 
     if st.button("Predict"):
         data = {'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
-                'year_of_surv': '2024', 'exp': exp, 'viz_tool': viz_tool, 'analyst_type': analyst_type}
+                'year_of_surv': 2024, 'exp': exp, 'viz_tool': viz_tool, 'analyst_type': analyst_type}
 
         new_input_data = pd.DataFrame([list(data.values())], columns=['company_type', 'is_manager', 'is_sql', 'is_python', 'year_of_surv', 'exp', 'viz_tool', 'analyst_type'])
 
