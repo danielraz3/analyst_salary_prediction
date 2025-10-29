@@ -2,8 +2,6 @@
 # coding: utf-8
 
 # In[5]:
-
-
 import streamlit as st
 import pandas as pd
 import scipy
@@ -60,7 +58,7 @@ def main():
         """,
         unsafe_allow_html=True
     )
-    st.markdown("<h1 style='text-align: center;'>מחשבון שכר לאנליסטים 2024</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>מחשבון שכר לאנליסטים 2025</h1>", unsafe_allow_html=True)
     
     st.markdown("""
     <h2 style='text-align: center; color: gray; font-size: 16px;'>המחשבון מבוסס על תוצאות סקר אנליסטים שנערך בקבוצת <a href="https://www.facebook.com/groups/DataAnalyticsIsrael" target="_blank">Data Analyst</a></h2>
@@ -98,7 +96,7 @@ def main():
 
     if st.button("Predict"):
         data = {'company_type': company_type, 'is_manager': is_manager, 'is_sql': is_sql, 'is_python': is_python,
-                'year_of_surv': 2024, 'exp': exp, 'viz_tool': viz_tool, 'analyst_type': analyst_type}
+                'year_of_surv': 2025, 'exp': exp, 'viz_tool': viz_tool, 'analyst_type': analyst_type}
 
         new_input_data = pd.DataFrame([list(data.values())], columns=['company_type', 'is_manager', 'is_sql', 'is_python', 'year_of_surv', 'exp', 'viz_tool', 'analyst_type'])
 
@@ -116,4 +114,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

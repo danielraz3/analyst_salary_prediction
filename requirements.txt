@@ -5,4 +5,4 @@ joblib
 numpy
 scikit-learn==1.3.0
 pickleshare
-numpy
+numpy==1.24.4
